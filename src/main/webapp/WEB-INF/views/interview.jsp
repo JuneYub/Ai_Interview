@@ -16,18 +16,16 @@
 </head>
 
 <body>
-<div onload="load('myVideo')">
-    <video width="100%" height="100%" autoplay="autoplay" id="myVideo"></video>
-</div>
+<%--<div onload="load('myVideo')">--%>
+<%--    <video width="100%" height="100%" autoplay="autoplay" id="myVideo"></video>--%>
+<%--</div>--%>
 
 <div class="countdown">00</div>
 <script>countdown('countdown',30)</script>
-
-<input type="button" onclick="startTimer();" value="답변 제출"/>
 <hr/>
-
-<script type="text/javascript" src="../js/timer.js"></script>
-<script type="text/javascript" src="../js/camVideo.js"></script>
+<input type="button" onclick="startTimer();" value="답변 제출"/>
 
 </body>
 </html>
+<%--<script type="text/javascript" src="js/timer.js"></script>--%>
+<%--<script type="text/javascript" src="../js/camVideo.js"></script>--%>
