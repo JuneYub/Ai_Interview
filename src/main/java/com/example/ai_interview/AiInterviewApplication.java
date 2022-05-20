@@ -7,10 +7,11 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 public class AiInterviewApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(AiInterviewApplication.class, args);
     }
 
