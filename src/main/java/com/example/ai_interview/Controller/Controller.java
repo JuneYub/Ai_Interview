@@ -20,4 +20,12 @@ public class Controller {
 
         return mv;
     }
+
+    @RequestMapping("/interview")
+    public ModelAndView interview(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("interview");
+
+        return mv;
+    }
 }
