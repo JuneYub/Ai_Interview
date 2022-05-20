@@ -20,4 +20,14 @@ public class Controller {
 
         return mv;
     }
+
+    @RequestMapping("/main")
+    public ModelAndView main() {
+        // jsp파일 res를 위함
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("mainTag","It is tag Main");
+        mv.setViewName("main");
+
+        return mv;
+    }
 }
