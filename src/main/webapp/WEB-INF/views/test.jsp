@@ -16,7 +16,7 @@
     boolean show1 = false;
     boolean show2 = true;
 %>
-<h1>Test IN-40 branch</h1>
+<h1>Test</h1>
 
 <% if(show1) {%>
 <p>show1 is true</p>
