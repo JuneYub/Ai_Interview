@@ -30,4 +30,14 @@ public class Controller {
 
         return mv;
     }
+
+    @RequestMapping("/introduction")
+    public ModelAndView introduction() {
+        // jsp파일 res를 위함
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("introductionTag","It is tag Introduction");
+        mv.setViewName("introduction");
+
+        return mv;
+    }
 }
