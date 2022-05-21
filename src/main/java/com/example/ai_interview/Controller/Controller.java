@@ -40,4 +40,15 @@ public class Controller {
 
         return mv;
     }
+
+    @RequestMapping("/checkEquip")
+    public ModelAndView checkEquip() {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("checkEquipTag","It is tag checkEquip");
+        mv.setViewName("checkEquip");
+
+        
+
+        return mv;
+    }
 }
