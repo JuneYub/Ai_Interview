@@ -44,11 +44,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">소개</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">결과보기</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">문의하기</a></li>
                     </ul>
                 </div>
             </div>
@@ -67,7 +66,7 @@
                     <h2 class="section-heading text-uppercase">자기소개서 입력</h2>
                     <h3 class="section-subheading text-muted">지원동기 및 경험&활동 내용을 입력해주세요.</h3>
                 </div>
-                <form id="contactForm">
+                <form id="contactForm" action="introductionSend.do" method="post">
                     <div class="introduction-row align-items-center">
                         <div class="row align-items-stretch mb-5">
                             <div class="col-md-6 align-items-center" style="margin-bottom:2rem">
@@ -76,7 +75,7 @@
                             <div class="col-md-6" style="margin-bottom:2rem">
                                 <div class="form-group form-group-textarea mb-md-0">
                                     <!-- Message input-->
-                                    <textarea class="form-control" id="first" placeholder="300자 이상 500자 이하" style="resize: none" maxlength="500" required></textarea>
+                                    <textarea class="form-control" id="first" name="firstAns" placeholder="300자 이상 500자 이하" style="resize: none" maxlength="500" required></textarea>
                                     <div class="text-muted" id="first_length" style="text-align:right">0 / 500</div>
                                 </div>
                             </div>
@@ -86,13 +85,13 @@
                             <div class="col-md-6">
                                 <div class="form-group form-group-textarea mb-md-0">
                                     <!-- Message input-->
-                                    <textarea class="form-control" id="second" placeholder="300자 이상 500자 이하" style="resize: none" maxlength="500" required></textarea>
+                                    <textarea class="form-control" id="second" name="secondAns" placeholder="300자 이상 500자 이하" style="resize: none" maxlength="500" required></textarea>
                                     <div class="text-muted" id="second_length" style="text-align:right">0 / 500</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="text-end"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">면접 시작</button></div>
+                    <div class="text-end"><button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">면접 시작</button></div>
                 </form>
             </div>
         </section>
