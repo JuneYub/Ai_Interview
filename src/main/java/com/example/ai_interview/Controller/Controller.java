@@ -47,7 +47,7 @@ public class Controller {
     }
 
     @RequestMapping(value = "introductionSend.do", method = RequestMethod.POST)
-    public String memberRegi(Model model, String firstAns, String secondAns, introductionDto introDto) {
+    public String introductionSend(Model model, String firstAns, String secondAns, introductionDto introDto) {
         boolean firstAnsFlag = true;
         boolean secondAnsFlag = true;
         if (firstAns.length() < 300){
