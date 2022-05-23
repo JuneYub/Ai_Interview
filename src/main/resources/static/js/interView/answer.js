@@ -1,3 +1,4 @@
+/* Recog*/
 window.SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -41,6 +42,30 @@ function startrecog(){
 
 function endRecog(){
     recognition.stop();
-    console.log("The result is =========\n")
-    console.log(speechToText)
+}
+
+/* Timer */
+var tmhandler;
+function start(className, seconds, endFunction) {
+    var element;
+
+    function updateTimer(t) {
+        element.innerHTML = t;
+        if (t == 0) {
+            endFunction(speechToText)
+            return
+        } else {
+            tmhandler = setTimeout(updateTimer, 1000, t - 1);
+        }
+    }
+
+    element = document.getElementsByClassName(className);
+    if (element.length != 0) {
+        element = element[0];
+        element.innerHTML = seconds;
+        startrecog()
+        updateTimer(seconds);
+    } else {
+        alert("no timer");
+    }
 }
