@@ -14,15 +14,21 @@
         }
 
         .right-box {
-            /*background: blue;*/
+            background: wheat;
             float: right;
-            width: 50%;
+            width: 40%;
             height: 50%;
+        }
+        body {
+            background-image: url("../../../resources/static/assets/img/masthead_img.png");
+            background-repeat: no-repeat;
+            background-size: cover;
         }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/x-icon" href="../../../resources/static/assets/favicon.ico" />
     <title>면접화면</title>
-    <h1 id="question">Q: 자신의 장점을 설명해 주세요</h1>
+    <h1>면접 화면</h1>
 </head>
 
 <body>
@@ -31,6 +37,7 @@
 </div>
 <div class="right-box">
     <p>남은 시간</p>
+    <div id="question">Q: 자신의 장점을 설명해 주세요</div>
     <div class="countdown"> 00</div>
     <hr/>
     <div id="editor" contenteditable="true"></div>
