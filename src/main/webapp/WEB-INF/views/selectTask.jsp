@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- 중간에 %들어간건 java코드입니다
     태그 예제
     <%! %> 선언
@@ -66,33 +67,49 @@
                     <h2 class="section-heading text-uppercase">면접자 정보 입력</h2>
                     <h3 class="section-subheading text-muted">면접시 세부 직무를 선택해 주세요.</h3>
                 </div>
-                <form id="contactForm" action="introductionSend.do" method="post">
+
+                <form id="selectTaskForm" action="sendSelectedTasks.do" method="post">
                     <div class="introduction-row align-items-center">
-                        <div class="row align-items-stretch mb-5">
-                            <div class="col-md-6 align-items-center" style="margin-bottom:2rem">
-                                <h4 class="section-heading text-uppercase" style="text-align:center">지원 동기</h2>
-                            </div>
-                            <div class="col-md-6" style="margin-bottom:2rem">
-                                <div class="form-group form-group-textarea mb-md-0">
-                                    <!-- Message input-->
-                                    <textarea class="form-control" id="first" name="firstAns" placeholder="300자 이상 500자 이하" style="resize: none" maxlength="500" required></textarea>
-                                    <div class="text-muted" id="first_length" style="text-align:right">0 / 500</div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 align-items-center">
-                                <h4 class="section-heading text-uppercase" style="text-align:center">직무와 관련된 경험 및 활동</h2>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group form-group-textarea mb-md-0">
-                                    <!-- Message input-->
-                                    <textarea class="form-control" id="second" name="secondAns" placeholder="300자 이상 500자 이하" style="resize: none" maxlength="500" required></textarea>
-                                    <div class="text-muted" id="second_length" style="text-align:right">0 / 500</div>
-                                </div>
-                            </div>
-                        </div>
+                        <table class="table">
+                            <tr class="col-md-6 align-items-center" style="margin-bottom:2rem">
+                                <th colspan="2" class="section-heading text-uppercase" style="text-align:center">신청자</th>
+                                <th colspan="2" class="section-heading text-uppercase" style="text-align:center">
+                                    ${userName}
+                                </th>
+                            </tr>
+                            <tr class="col-md-6 align-items-center" style="margin-bottom:2rem">
+                                <th colspan="2" class="section-heading text-uppercase" style="text-align:center">ID</th>
+                                <th colspan="2" class="section-heading text-uppercase" style="text-align:center">
+                                    ${userId}
+                                </th>
+                            </tr>
+                            <tr class="col-md-6 align-items-center" style="margin-bottom:2rem">
+                                <th class="section-heading text-uppercase" style="text-align:center">1차 직무</th>
+                                <th class="section-heading text-uppercase" style="text-align:center">
+                                    <select name="fstMajor" id="fstMajor" required>
+                                        <option value="" selected>선택해주세요</option>
+                                        <c:forEach var="list" items="${fstTask}">
+                                            <option value="${list}">${list}</option>
+                                        </c:forEach>
+                                    </select>
+                                </th>
+                                <th class="section-heading text-uppercase" style="text-align:center">2차 직무</th>
+                                <th class="section-heading text-uppercase" style="text-align:center">
+                                    <select name="sndMajor" id="sndMajor" required>
+                                        <option value="" selected>선택해주세요</option>
+                                        <c:forEach var="list" items="${sndTask}">
+                                            <option value="${list}">${list}</option>
+                                        </c:forEach>
+                                    </select>
+                                </th>
+                            </tr>
+                        </table>
+                    <div/>
+                    <div class="text-end">
+                        <button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">다음</button>
                     </div>
-                    <div class="text-end"><button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">면접 시작</button></div>
                 </form>
+
             </div>
         </section>
         <!-- Footer-->
