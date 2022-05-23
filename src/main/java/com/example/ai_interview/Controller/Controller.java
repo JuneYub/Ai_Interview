@@ -76,4 +76,14 @@ public class Controller {
             return "redirect:/introduction";
         }
     }
+
+    @RequestMapping("/selectTask")
+    public ModelAndView selectTask() {
+        // jsp파일 res를 위함
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("selectTaskTag","It is tag Introduction");
+        mv.setViewName("selectTask");
+
+        return mv;
+    }
 }
