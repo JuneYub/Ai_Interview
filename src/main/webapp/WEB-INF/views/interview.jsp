@@ -81,13 +81,29 @@
     var answers = []
 
     function submitAnswer() {
+        hideBtEdit()
         var ans = document.getElementById('editor').innerText
         answers.push(ans)
         document.getElementById('editor').innerText = ""
         // 다음질문 받아오고
-        document.getElementById('question').innerText = "다음질문"
-        hideBtEdit()
-        start('countdown', 30, endFunction)
+        fetch("http://localhost:9090/requestQuestion", {
+            method: "POST",
+            type: "text",
+            name: "ans",
+            value: ans.toString(),
+            // headers: {
+            //     "Content-Type": "text/plain",
+            // },
+            // body: JSON.stringify({
+            //     title: "ans",
+            //     body: ans,
+            //     userId: 1,
+            // }),
+        }).then((response) => {
+            console.log(response)
+            document.getElementById('question').innerText = response.body.toString()
+            start('countdown', 30, endFunction)
+        });
     }
 </script>
 

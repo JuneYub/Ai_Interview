@@ -13,6 +13,8 @@ import java.util.*;
 
 import com.example.ai_interview.Model.introductionDto;
 
+import javax.servlet.http.HttpServletRequest;
+
 @org.springframework.stereotype.Controller
 public class Controller {
 
@@ -26,15 +28,12 @@ public class Controller {
         return mv;
     }
 
-    @PostMapping("/interview")
-    public ModelAndView interview(Model model, String ans) {
-
+    @PostMapping(value = "/requestQuestion", produces="text/plain")
+    public String interview(Model model, HttpServletRequest request) {
+        var ans = request.getParameter("studentId");
         System.out.println(ans);
 
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("interview");
-
-        return mv;
+        return ans;
     }
     @GetMapping("/interview")
     public ModelAndView interview() {
