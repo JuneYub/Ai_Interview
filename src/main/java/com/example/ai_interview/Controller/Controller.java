@@ -3,16 +3,10 @@ package com.example.ai_interview.Controller;
 
 import org.hibernate.type.TrueFalseType;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 import com.example.ai_interview.Model.introductionDto;
 
@@ -96,4 +90,42 @@ public class Controller {
             return "redirect:/introduction";
         }
     }
+
+    @RequestMapping("/selectTask")
+    public ModelAndView selectTask() {
+        // jsp파일 res를 위함
+        ModelAndView mv = new ModelAndView();
+
+        // 사용자 정보 전달 (Model에서 사용자 정보 가져온다는 것을 가정)
+        String name = "손홍일";
+        String id = "sonhl7626";
+
+        mv.addObject("userName",name);
+        mv.addObject("userId",id);
+
+        // 주어질 instance 예시로 정의 (Model 에서 DB에 접근해 정보를 들고온다는 것을 가정)
+        List<String> fstTask = new ArrayList<>();
+        fstTask.add("기계공학과");
+        fstTask.add("컴퓨터공학과");
+        List<String> sndTask = new ArrayList<>();
+        sndTask.add("AI 프로그래머");
+        sndTask.add("모바일 프로그래머");
+
+        mv.addObject("fstTask",fstTask);
+        mv.addObject("sndTask",sndTask);
+
+        mv.addObject("selectTaskTag","It is tag Introduction");
+        mv.setViewName("selectTask");
+        return mv;
+    }
+
+    @RequestMapping(value = "sendSelectedTasks.do", method = RequestMethod.POST)
+    public String sendSelectedTasks(
+            @RequestParam("fstMajor") String fstMajor,
+            @RequestParam("sndMajor") String sndMajor
+    ){
+        System.out.println("Selected Task is " + fstMajor + sndMajor);
+        return "redirect:/introduction";
+    }
+
 }
