@@ -1,7 +1,10 @@
 package com.example.ai_interview.Controller;
 
 
+import com.example.ai_interview.Service.JobList;
+import com.example.ai_interview.Service.Service;
 import org.hibernate.type.TrueFalseType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -95,5 +98,24 @@ public class Controller {
 
             return "redirect:/introduction";
         }
+    }
+
+    @Autowired
+    private JobList jobList;
+    /*
+    @GetMapping("index")
+    public String dataList(Model model) {
+        model.addAttribute("firstJobList", jobList.firstJobList());
+        System.out.println(jobList.firstJobList());
+        return "index";
+    }
+
+    */
+
+    @GetMapping("index")
+    public String dataList(Model model) {
+        model.addAttribute("firstJobList", jobList.secondjobList());
+        System.out.println(jobList.secondjobList());
+        return "index";
     }
 }
