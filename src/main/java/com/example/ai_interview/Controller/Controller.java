@@ -22,19 +22,26 @@ public class Controller {
     public ModelAndView index() {
         // jsp파일 res를 위함
         ModelAndView mv = new ModelAndView();
-        mv.addObject("testTag","It is tag Test");
+        mv.addObject("testTag", "It is tag Test");
         mv.setViewName("test");
 
         return mv;
     }
 
-    @PostMapping(value = "/requestQuestion", produces="text/plain")
-    public String interview(Model model, HttpServletRequest request) {
-        var ans = request.getParameter("studentId");
+    //    @PostMapping(value = "/requestQuestion", produces="text/plain")
+//    public String interview(Model model, String ans) {
+//        System.out.println(ans);
+//
+//        return ans;
+//    }
+    @PostMapping(value = "/requestQuestion", produces = "text/plain")
+    @ResponseBody
+    public String interview(@RequestBody String ans) {
         System.out.println(ans);
 
         return ans;
     }
+
     @GetMapping("/interview")
     public ModelAndView interview() {
         ModelAndView mv = new ModelAndView();
@@ -42,11 +49,12 @@ public class Controller {
 
         return mv;
     }
+
     @RequestMapping("/main")
     public ModelAndView main() {
         // jsp파일 res를 위함
         ModelAndView mv = new ModelAndView();
-        mv.addObject("mainTag","It is tag Main");
+        mv.addObject("mainTag", "It is tag Main");
         mv.setViewName("main");
 
         return mv;
@@ -56,7 +64,7 @@ public class Controller {
     public ModelAndView introduction() {
         // jsp파일 res를 위함
         ModelAndView mv = new ModelAndView();
-        mv.addObject("introductionTag","It is tag Introduction");
+        mv.addObject("introductionTag", "It is tag Introduction");
         mv.setViewName("introduction");
 
         return mv;
@@ -66,27 +74,24 @@ public class Controller {
     public String introductionSend(Model model, String firstAns, String secondAns, introductionDto introDto) {
         boolean firstAnsFlag = true;
         boolean secondAnsFlag = true;
-        if (firstAns.length() < 300){
+        if (firstAns.length() < 300) {
             firstAnsFlag = false;
-        }
-        else {
+        } else {
             introDto.setFirstAns(firstAns);
         }
 
-        if (secondAns.length() < 300){
+        if (secondAns.length() < 300) {
             secondAnsFlag = false;
-        }
-        else {
+        } else {
             introDto.setSecondAns(secondAns);
         }
 
-        if (firstAnsFlag && secondAnsFlag){
+        if (firstAnsFlag && secondAnsFlag) {
             System.out.println(introDto.getFirstAns());
             System.out.println(introDto.getSecondAns());
 
             return "redirect:/introduction";
-        }
-        else {
+        } else {
             System.out.println("300자 이상 작성해주세요.");
 
             return "redirect:/introduction";
@@ -122,8 +127,8 @@ public class Controller {
         String name = "손홍일";
         String id = "sonhl7626";
 
-        mv.addObject("userName",name);
-        mv.addObject("userId",id);
+        mv.addObject("userName", name);
+        mv.addObject("userId", id);
 
         // 주어질 instance 예시로 정의 (Model 에서 DB에 접근해 정보를 들고온다는 것을 가정)
         List<String> fstTask = new ArrayList<>();
@@ -133,10 +138,10 @@ public class Controller {
         sndTask.add("AI 프로그래머");
         sndTask.add("모바일 프로그래머");
 
-        mv.addObject("fstTask",fstTask);
-        mv.addObject("sndTask",sndTask);
+        mv.addObject("fstTask", fstTask);
+        mv.addObject("sndTask", sndTask);
 
-        mv.addObject("selectTaskTag","It is tag Introduction");
+        mv.addObject("selectTaskTag", "It is tag Introduction");
         mv.setViewName("selectTask");
         return mv;
     }
@@ -145,7 +150,7 @@ public class Controller {
     public String sendSelectedTasks(
             @RequestParam("fstMajor") String fstMajor,
             @RequestParam("sndMajor") String sndMajor
-    ){
+    ) {
         System.out.println("Selected Task is " + fstMajor + sndMajor);
         return "redirect:/introduction";
     }

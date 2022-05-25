@@ -72,7 +72,7 @@
     };
     load('myVideo')
     hideBtEdit()
-    start('countdown', 30, endFunction)
+    start('countdown', 10, endFunction)
 </script>
 
 <script>
@@ -82,28 +82,23 @@
 
     function submitAnswer() {
         hideBtEdit()
-        var ans = document.getElementById('editor').innerText
-        answers.push(ans)
+        let modified = document.getElementById('editor').innerText;
+        answers.push(modified)
         document.getElementById('editor').innerText = ""
         // 다음질문 받아오고
         fetch("http://localhost:9090/requestQuestion", {
-            method: "POST",
-            type: "text",
-            name: "ans",
-            value: ans.toString(),
-            // headers: {
-            //     "Content-Type": "text/plain",
-            // },
-            // body: JSON.stringify({
-            //     title: "ans",
-            //     body: ans,
-            //     userId: 1,
-            // }),
+            method: 'POST',
+            headers: {
+                "Content-Type": "text/plain",
+            },
+            body: modified,
+        }).then((response) => {
+            return response.text()
         }).then((response) => {
             console.log(response)
-            document.getElementById('question').innerText = response.body.toString()
+            document.getElementById('question').innerText = response
             start('countdown', 30, endFunction)
-        });
+        }).catch( err => console.log(err));
     }
 </script>
 
