@@ -30,6 +30,20 @@
         <!-- Custom Introduction JavaScript -->
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="../../../resources/static/js/introduction.js"></script>
+        <script>
+            function changeJob(fstJobName) {
+                $('#sndMajor').find('option').remove();
+                console.log(fstJobName);
+                const sndJobName = JSON.parse('${secondJobList}');
+                console.log(sndJobName);
+                for (var val in sndJobName[fstJobName]){
+                    $('#sndMajor').append("<option value='" + sndJobName[fstJobName][val] +"'>" + sndJobName[fstJobName][val] + "</option>");
+
+                }
+            }
+
+
+        </script>
 
     </head>
 
@@ -86,20 +100,23 @@
                             <tr class="col-md-6 align-items-center" style="margin-bottom:2rem">
                                 <th class="section-heading text-uppercase" style="text-align:center">1차 직무</th>
                                 <th class="section-heading text-uppercase" style="text-align:center">
-                                    <select name="fstMajor" id="fstMajor" required>
+
+
+
+                                    <select name="fstMajor" id="fstMajor" onchange="changeJob(this.value)">
                                         <option value="" selected>선택해주세요</option>
-                                        <c:forEach var="list" items="${fstTask}">
+                                        <c:forEach var="list" items="${firstJobList}">
                                             <option value="${list}">${list}</option>
                                         </c:forEach>
                                     </select>
+
                                 </th>
+<%--                                <input type="hidden" name="sndMajorList" id="sndMajorList" value="${sndJobList.get("경영사무")}"/>--%>
+
                                 <th class="section-heading text-uppercase" style="text-align:center">2차 직무</th>
                                 <th class="section-heading text-uppercase" style="text-align:center">
                                     <select name="sndMajor" id="sndMajor" required>
                                         <option value="" selected>선택해주세요</option>
-                                        <c:forEach var="list" items="${sndTask}">
-                                            <option value="${list}">${list}</option>
-                                        </c:forEach>
                                     </select>
                                 </th>
                             </tr>
@@ -109,6 +126,8 @@
                         <button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">다음</button>
                     </div>
                 </form>
+
+
 
             </div>
         </section>
@@ -141,5 +160,6 @@
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
         <script src="../../../resources/static/js/introduction.js"></script>
+
         </body>
 </html>
