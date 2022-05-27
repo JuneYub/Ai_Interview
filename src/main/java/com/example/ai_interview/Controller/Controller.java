@@ -136,12 +136,6 @@ public class Controller {
 
         return mv;
     }
-    public String test(Model model, @RequestParam("selectFirst") String selectFirst) {
-        String a = selectFirst;
-        System.out.println(a);
-        return a;
-    }
-
 
     @RequestMapping(value = "sendSelectedTasks.do", method = RequestMethod.POST)
     public String sendSelectedTasks(

@@ -111,7 +111,6 @@
                                     </select>
 
                                 </th>
-<%--                                <input type="hidden" name="sndMajorList" id="sndMajorList" value="${sndJobList.get("경영사무")}"/>--%>
 
                                 <th class="section-heading text-uppercase" style="text-align:center">2차 직무</th>
                                 <th class="section-heading text-uppercase" style="text-align:center">
