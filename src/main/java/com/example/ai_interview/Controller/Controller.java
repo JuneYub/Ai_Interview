@@ -149,4 +149,14 @@ public class Controller {
         return "redirect:/introduction";
     }
 
+    @RequestMapping("/result")
+    public ModelAndView result() {
+        // jsp파일 res를 위함
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("resultTag", "It is tag result");
+        mv.setViewName("result");
+
+        return mv;
+    }
+
 }
