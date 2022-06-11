@@ -1,9 +1,11 @@
 package com.example.ai_interview.Controller;
 
 
+import com.example.ai_interview.Repository.JobRepository;
+import com.example.ai_interview.Repository.SecondJobRepository;
 import com.example.ai_interview.Service.JobList;
-import com.example.ai_interview.Service.Service;
-import org.hibernate.type.TrueFalseType;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -101,27 +103,24 @@ public class Controller {
 
     @Autowired
     private JobList jobList;
-    /*
-    @GetMapping("index")
-    public String dataList(Model model) {
-        model.addAttribute("firstJobList", jobList.firstJobList());
-        System.out.println(jobList.firstJobList());
-        return "index";
-    }
 
-    */
+    @Autowired
+    private JobRepository jobRepository;
 
-    @GetMapping("index")
-    public String dataList(Model model) {
-        model.addAttribute("firstJobList", jobList.secondjobList());
-        System.out.println(jobList.secondjobList());
-        return "index";
-    }
+    @Autowired
+    private SecondJobRepository secondJobRepository;
+
 
     @RequestMapping("/selectTask")
-    public ModelAndView selectTask() {
+    public ModelAndView selectTask(Model model) {
+
         // jsp파일 res를 위함
         ModelAndView mv = new ModelAndView();
+
+        List<String> firstJobList = jobRepository.jobListAll();
+        LinkedHashMap<String, Object> secondJobList = jobList.secondjobList();
+        JSONObject jsonObject = new JSONObject(secondJobList);
+
 
         // 사용자 정보 전달 (Model에서 사용자 정보 가져온다는 것을 가정)
         String name = "손홍일";
@@ -130,19 +129,14 @@ public class Controller {
         mv.addObject("userName", name);
         mv.addObject("userId", id);
 
-        // 주어질 instance 예시로 정의 (Model 에서 DB에 접근해 정보를 들고온다는 것을 가정)
-        List<String> fstTask = new ArrayList<>();
-        fstTask.add("기계공학과");
-        fstTask.add("컴퓨터공학과");
-        List<String> sndTask = new ArrayList<>();
-        sndTask.add("AI 프로그래머");
-        sndTask.add("모바일 프로그래머");
 
-        mv.addObject("fstTask", fstTask);
-        mv.addObject("sndTask", sndTask);
+        mv.addObject("firstJobList",firstJobList);
+        mv.addObject("secondJobList",jsonObject);
+
 
         mv.addObject("selectTaskTag", "It is tag Introduction");
         mv.setViewName("selectTask");
+
         return mv;
     }
 

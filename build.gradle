@@ -31,6 +31,9 @@ dependencies {
     // jsp 사용을 위한 라이브러리
     implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
     implementation "javax.servlet:jstl"
+
+    // json 사용을 위한 라이브러리리
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 }
 
 
