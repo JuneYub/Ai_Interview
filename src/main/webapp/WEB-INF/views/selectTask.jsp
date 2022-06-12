@@ -32,6 +32,7 @@
         <script src="../../../resources/static/js/introduction.js"></script>
         <script>
             function changeJob(fstJobName) {
+                // $('#firstJob').value = fstJobName
                 $('#sndMajor').find('option').remove();
                 console.log(fstJobName);
                 const sndJobName = JSON.parse('${secondJobList}');
@@ -41,6 +42,10 @@
 
                 }
             }
+
+            // function changeSecJob(str){
+            //     $('#secondJob').value = str
+            // }
 
 
         </script>
@@ -114,7 +119,7 @@
 
                                 <th class="section-heading text-uppercase" style="text-align:center">2차 직무</th>
                                 <th class="section-heading text-uppercase" style="text-align:center">
-                                    <select name="sndMajor" id="sndMajor" required>
+                                    <select name="sndMajor" id="sndMajor" onchange="changeSecJob(this.value)" required>
                                         <option value="" selected>선택해주세요</option>
                                     </select>
                                 </th>
@@ -122,6 +127,8 @@
                         </table>
                     <div/>
                     <div class="text-end">
+<%--                        <input type="hidden" id="firstJob" name="firstJob" value=""></input>--%>
+<%--                        <input type="hidden" id="secondJob" name="secondJob" value=""></input>--%>
                         <button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">다음</button>
                     </div>
                 </form>

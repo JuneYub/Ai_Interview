@@ -7,6 +7,15 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%--<script>--%>
+<%--    function httpGet(page)--%>
+<%--    {--%>
+<%--        var xmlHttp = new XMLHttpRequest();--%>
+<%--        xmlHttp.open( "GET", "http://localhost:9090/"+page, false ); // false for synchronous request--%>
+<%--        xmlHttp.send( null );--%>
+<%--        return xmlHttp.responseText;--%>
+<%--    }--%>
+<%--</script>--%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,8 +49,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">소개</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:9090/main">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:9090/introduction">소개</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">결과보기</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">문의하기</a></li>
 <%--                        <li class="nav-item"><a class="nav-link" href="#contact"></a></li>--%>
@@ -55,7 +64,7 @@
                 <div class="masthead-subheading">합격으로 가는 가장 똑똑한 길</div>
                 <div class="masthead-heading text-uppercase">AI를 활용한 실전 면접</div>
                 <div class="masthead-subheading"><h5>AI 면접을 통해서 전문 기술에 대한 질문과 면접 태도에 대해 평가를 해드립니다</h5></div>
-                <a class="btn btn-outline-success btn-xl text-uppercase" href="#services">AI면접 </a>
+                <a class="btn btn-outline-success btn-xl text-uppercase" href="http://localhost:9090/selectTask">AI면접 </a>
             </div>
         </header>
 <%--        <!-- Services-->--%>
@@ -615,7 +624,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
 <%--        <script src="js/scripts.js"></script>--%>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/scripts.js"></script>
+        <script type="text/javascript" src="../../../resources/static/js/scripts.js"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
