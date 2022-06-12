@@ -75,7 +75,7 @@
                             <div class="col-md-6" style="margin-bottom:2rem">
                                 <div class="form-group form-group-textarea mb-md-0">
                                     <!-- Message input-->
-                                    <textarea class="form-control" id="first" name="firstAns" placeholder="300자 이상 500자 이하" style="resize: none" maxlength="500" required></textarea>
+                                    <textarea class="form-control" id="first" name="firstAns" placeholder="300자 이상 500자 이하" style="resize: none" maxlength="500" required>${introFirst}</textarea>
                                     <div class="text-muted" id="first_length" style="text-align:right">0 / 500</div>
                                 </div>
                             </div>
@@ -85,12 +85,14 @@
                             <div class="col-md-6">
                                 <div class="form-group form-group-textarea mb-md-0">
                                     <!-- Message input-->
-                                    <textarea class="form-control" id="second" name="secondAns" placeholder="300자 이상 500자 이하" style="resize: none" maxlength="500" required></textarea>
+                                    <textarea class="form-control" id="second" name="secondAns" placeholder="300자 이상 500자 이하" style="resize: none" maxlength="500" required>${introSecond}</textarea>
                                     <div class="text-muted" id="second_length" style="text-align:right">0 / 500</div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="firstJob" id="firstJob" value=${firstJob}>
+                    <input type="hidden" name="secondJob" id="secondJob" value=${secondJob}>
                     <div class="text-end"><button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">면접 시작</button></div>
                 </form>
             </div>
@@ -116,7 +118,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
 <%--        <script src="js/scripts.js"></script>--%>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/scripts.js"></script>
+        <script type="text/javascript" src="../../../resources/static/js/scripts.js"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->

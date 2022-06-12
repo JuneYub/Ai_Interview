@@ -44,8 +44,10 @@ public class Controller {
         return ans;
     }
 
-    @GetMapping("/interview")
-    public ModelAndView interview() {
+    // 인터뷰 페이지로 넘어갈때 post로 바꾸고
+    // 값들 넘어오는지 확인
+    @RequestMapping(value = "/interview",method = RequestMethod.POST)
+    public ModelAndView interview(Model model, String firstJob, String secondJob, introductionDto introDto) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("interview");
 
@@ -62,42 +64,44 @@ public class Controller {
         return mv;
     }
 
-    @RequestMapping("/introduction")
-    public ModelAndView introduction() {
+    @RequestMapping(value ="/introduction", method = RequestMethod.POST)
+    public ModelAndView introduction(Model model, String firstJob, String secondJob, introductionDto introDto) {
         // jsp파일 res를 위함
         ModelAndView mv = new ModelAndView();
-        mv.addObject("introductionTag", "It is tag Introduction");
+        mv.addObject("firstJob", firstJob);
+        mv.addObject("secondJob", secondJob);
         mv.setViewName("introduction");
 
         return mv;
     }
 
     @RequestMapping(value = "introductionSend.do", method = RequestMethod.POST)
-    public String introductionSend(Model model, String firstAns, String secondAns, introductionDto introDto) {
-        boolean firstAnsFlag = true;
-        boolean secondAnsFlag = true;
-        if (firstAns.length() < 300) {
-            firstAnsFlag = false;
-        } else {
-            introDto.setFirstAns(firstAns);
-        }
+    public ModelAndView introductionSend(Model model, String firstAns, String secondAns, String firstJob, String secondJob, introductionDto introDto) {
+        introDto.setFirstAns(firstAns);
+        introDto.setSecondAns(secondAns);
 
-        if (secondAns.length() < 300) {
-            secondAnsFlag = false;
-        } else {
-            introDto.setSecondAns(secondAns);
-        }
+        System.out.println(firstJob);
 
-        if (firstAnsFlag && secondAnsFlag) {
-            System.out.println(introDto.getFirstAns());
-            System.out.println(introDto.getSecondAns());
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("introFirst", introDto.getFirstAns());
+        mv.addObject("introSecond", introDto.getSecondAns());
+        mv.addObject("firstJob", firstJob);
+        mv.addObject("secondJob", secondJob);
 
-            return "redirect:/introduction";
-        } else {
+        if (firstAns.length() < 300 || secondAns.length() < 300) {
+            // 글자 수 미달
             System.out.println("300자 이상 작성해주세요.");
+            mv.setViewName("introduction");
 
-            return "redirect:/introduction";
+            return mv;
         }
+
+//        System.out.println(introDto.getFirstAns());
+//        System.out.println(introDto.getSecondAns());
+        mv.setViewName("interview");
+
+        return mv;
+
     }
 
 
@@ -130,8 +134,8 @@ public class Controller {
         mv.addObject("userId", id);
 
 
-        mv.addObject("firstJobList",firstJobList);
-        mv.addObject("secondJobList",jsonObject);
+        mv.addObject("firstJobList", firstJobList);
+        mv.addObject("secondJobList", jsonObject);
 
 
         mv.addObject("selectTaskTag", "It is tag Introduction");
@@ -141,12 +145,18 @@ public class Controller {
     }
 
     @RequestMapping(value = "sendSelectedTasks.do", method = RequestMethod.POST)
-    public String sendSelectedTasks(
+    public ModelAndView sendSelectedTasks(
             @RequestParam("fstMajor") String fstMajor,
             @RequestParam("sndMajor") String sndMajor
     ) {
         System.out.println("Selected Task is " + fstMajor + sndMajor);
-        return "redirect:/introduction";
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("introFirst", "");
+        mv.addObject("introSecond", "");
+        mv.addObject("firstJob", fstMajor);
+        mv.addObject("secondJob", sndMajor);
+        mv.setViewName("introduction");
+        return mv;
     }
 
     @RequestMapping("/result")
