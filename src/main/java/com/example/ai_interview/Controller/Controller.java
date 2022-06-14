@@ -46,7 +46,7 @@ public class Controller {
 
     // 인터뷰 페이지로 넘어갈때 post로 바꾸고
     // 값들 넘어오는지 확인
-    @RequestMapping(value = "/interview",method = RequestMethod.POST)
+    @RequestMapping(value = "/interview", method = RequestMethod.POST)
     public ModelAndView interview(Model model, String firstJob, String secondJob, introductionDto introDto) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("interview");
@@ -64,7 +64,7 @@ public class Controller {
         return mv;
     }
 
-    @RequestMapping(value ="/introduction", method = RequestMethod.POST)
+    @RequestMapping(value = "/introduction", method = RequestMethod.POST)
     public ModelAndView introduction(Model model, String firstJob, String secondJob, introductionDto introDto) {
         // jsp파일 res를 위함
         ModelAndView mv = new ModelAndView();
@@ -160,10 +160,21 @@ public class Controller {
     }
 
     @RequestMapping("/result")
-    public ModelAndView result() {
+    public ModelAndView result(Model model, String question1, String question2, String question3, String answer1, String answer2, String answer3,
+                               String firstJob,String secondJob,String introFirst,String introSecond) {
         // jsp파일 res를 위함
         ModelAndView mv = new ModelAndView();
-        mv.addObject("resultTag", "It is tag result");
+        mv.addObject("question1", question1);
+        mv.addObject("question2", question2);
+        mv.addObject("question3", question3);
+        mv.addObject("answer1", answer1);
+        mv.addObject("answer2", answer2);
+        mv.addObject("answer3", answer3);
+        mv.addObject("Job1", firstJob);
+        mv.addObject("Job2", secondJob);
+        mv.addObject("intro1", introFirst);
+        mv.addObject("intro2", introSecond);
+
         mv.setViewName("result");
 
         return mv;
