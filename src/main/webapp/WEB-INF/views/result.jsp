@@ -17,9 +17,41 @@
     A.add((String) request.getAttribute("answer2"));
     A.add((String) request.getAttribute("answer3"));
 %>
+<script>
+    const form = document.createElement('form');
+    function addElementForPost(name, value) {
+        let hiddenField = document.createElement('input');
+        hiddenField.type = 'hidden';
+        hiddenField.name = name;
+        hiddenField.value = value;
+        form.appendChild(hiddenField);
+    }
+    function post(path, method = 'post') {
+        // The rest of this code assumes you are not using a library.
+        // It can be made less verbose if you use one.
+        // const form = document.createElement('form');
+        form.method = method;
+        form.action = path;
+
+        addElementForPost("question1", "${question1}");
+        addElementForPost("answer1","${answer1}");
+        addElementForPost("question2", "${question2}");
+        addElementForPost("answer2","${answer2}");
+        addElementForPost("question3", "${question3}");
+        addElementForPost("answer3","${answer3}");
+        addElementForPost("firstJob", "${firstJob}")
+        addElementForPost("secondJob", "${secondJob}")
+        addElementForPost("introFirst", "${introFirst}")
+        addElementForPost("introSecond", "${introSecond}")
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>IntelliHong</title>
@@ -143,6 +175,11 @@
                 <% } %>
             </ul>
         </div>
+    </div>
+    <div class="form-group form-group-textarea mb-md-0">
+        <!-- Message input-->
+        <textarea class="form-control" id="student" name="student" placeholder="학번을 입력해주세요" style="resize: none" maxlength="10" required></textarea>
+        <div class="text-end"><button href="javascript:;" class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit", onclick="post('http://localhost:9090/save','post')">저장하기</button></div>
     </div>
 
 </section>

@@ -1,9 +1,12 @@
 package com.example.ai_interview.Controller;
 
 
+import com.example.ai_interview.Model.RecordEntity;
 import com.example.ai_interview.Repository.JobRepository;
 import com.example.ai_interview.Repository.SecondJobRepository;
+import com.example.ai_interview.Service.DbService;
 import com.example.ai_interview.Service.JobList;
+import com.example.ai_interview.Service.UserRepository;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @org.springframework.stereotype.Controller
 public class Controller {
+
+    @Autowired
+    private DbService dbService;
 
     @RequestMapping("/index")
     public ModelAndView index() {
@@ -161,7 +167,7 @@ public class Controller {
 
     @RequestMapping("/result")
     public ModelAndView result(Model model, String question1, String question2, String question3, String answer1, String answer2, String answer3,
-                               String firstJob,String secondJob,String introFirst,String introSecond) {
+                               String firstJob, String secondJob, String introFirst, String introSecond) {
         // jsp파일 res를 위함
         ModelAndView mv = new ModelAndView();
         mv.addObject("question1", question1);
@@ -178,6 +184,28 @@ public class Controller {
         mv.setViewName("result");
 
         return mv;
+    }
+
+    @RequestMapping("/save")
+    public String result(Model model, String question1, String question2, String question3, String answer1, String answer2, String answer3,
+                         String firstJob, String secondJob, String introFirst, String introSecond, String studentId) {
+        //db save
+        RecordEntity userEntity = RecordEntity.builder()
+                .a1(answer1)
+                .a2(answer2)
+                .a3(answer3)
+                .q1(question1)
+                .q2(question2)
+                .q3(question3)
+                .firstJobName(firstJob)
+                .secondJobName(secondJob)
+                .introFirst(introFirst)
+                .introSecond(introSecond)
+                .build();
+
+        dbService.insert(userEntity);
+
+        return "/main";
     }
 
 }
