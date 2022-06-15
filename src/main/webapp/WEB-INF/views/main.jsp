@@ -51,7 +51,7 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="http://localhost:9090/main">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="http://localhost:9090/introduction">소개</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">결과보기</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:9090/record">결과보기</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">문의하기</a></li>
 <%--                        <li class="nav-item"><a class="nav-link" href="#contact"></a></li>--%>
                     </ul>

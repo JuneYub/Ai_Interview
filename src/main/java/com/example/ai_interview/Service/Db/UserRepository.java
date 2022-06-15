@@ -1,4 +1,4 @@
-package com.example.ai_interview.Service;
+package com.example.ai_interview.Service.Db;
 
 import com.example.ai_interview.Model.RecordEntity;
 import org.springframework.data.repository.CrudRepository;

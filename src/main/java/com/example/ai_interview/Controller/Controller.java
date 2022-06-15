@@ -4,10 +4,8 @@ package com.example.ai_interview.Controller;
 import com.example.ai_interview.Model.RecordEntity;
 import com.example.ai_interview.Repository.JobRepository;
 import com.example.ai_interview.Repository.SecondJobRepository;
-import com.example.ai_interview.Service.DbService;
+import com.example.ai_interview.Service.Db.DbService;
 import com.example.ai_interview.Service.JobList;
-import com.example.ai_interview.Service.UserRepository;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -17,8 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.*;
 
 import com.example.ai_interview.Model.introductionDto;
-
-import javax.servlet.http.HttpServletRequest;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -201,11 +197,35 @@ public class Controller {
                 .secondJobName(secondJob)
                 .introFirst(introFirst)
                 .introSecond(introSecond)
+                .studentId(studentId)
                 .build();
 
         dbService.insert(userEntity);
 
         return "/main";
+    }
+
+    @RequestMapping(value = "/record", method = RequestMethod.GET)
+    public ModelAndView record(Model model) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("record");
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/record", method = RequestMethod.POST)
+    public ModelAndView record(Model model, String studentId) {
+
+        ArrayList<RecordEntity> re = dbService.find(studentId);
+        System.out.println("test!!!!!!!!!!!!");
+//        System.out.println("sId = "+studentId);
+        System.out.println(re.size());
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("list", re);
+        mv.setViewName("record");
+
+        return mv;
     }
 
 }
