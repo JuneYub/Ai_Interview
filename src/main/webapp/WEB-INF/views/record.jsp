@@ -6,16 +6,18 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ page import="com.example.ai_interview.Model.RecordEntity" %>
 
 <%
-    ArrayList<String> Q = new ArrayList<>();
-    Q.add((String) request.getAttribute("question1"));
-    Q.add((String) request.getAttribute("question2"));
-    Q.add((String) request.getAttribute("question3"));
-    ArrayList<String> A = new ArrayList<>();
-    A.add((String) request.getAttribute("answer1"));
-    A.add((String) request.getAttribute("answer2"));
-    A.add((String) request.getAttribute("answer3"));
+    ArrayList<RecordEntity> list = (ArrayList<RecordEntity>) request.getAttribute("list");
+//    ArrayList<String> Q = new ArrayList<>();
+//    Q.add((String) request.getAttribute("question1"));
+//    Q.add((String) request.getAttribute("question2"));
+//    Q.add((String) request.getAttribute("question3"));
+//    ArrayList<String> A = new ArrayList<>();
+//    A.add((String) request.getAttribute("answer1"));
+//    A.add((String) request.getAttribute("answer2"));
+//    A.add((String) request.getAttribute("answer3"));
 %>
 <script>
     const form = document.createElement('form');
@@ -33,16 +35,16 @@
         form.method = method;
         form.action = path;
 
-        addElementForPost("question1", "${question1}");
-        addElementForPost("question2", "${question2}");
-        addElementForPost("question3", "${question3}");
-        addElementForPost("answer1","${answer1}");
-        addElementForPost("answer2","${answer2}");
-        addElementForPost("answer3","${answer3}");
-        addElementForPost("firstJob", "${Job1}")
-        addElementForPost("secondJob", "${Job2}")
-        addElementForPost("introFirst", "${intro1}")
-        addElementForPost("introSecond", "${intro2}")
+        <%--addElementForPost("question1", "${question1}");--%>
+        <%--addElementForPost("question2", "${question2}");--%>
+        <%--addElementForPost("question3", "${question3}");--%>
+        <%--addElementForPost("answer1","${answer1}");--%>
+        <%--addElementForPost("answer2","${answer2}");--%>
+        <%--addElementForPost("answer3","${answer3}");--%>
+        <%--addElementForPost("firstJob", "${Job1}")--%>
+        <%--addElementForPost("secondJob", "${Job2}")--%>
+        <%--addElementForPost("introFirst", "${intro1}")--%>
+        <%--addElementForPost("introSecond", "${intro2}")--%>
         addElementForPost("studentId", document.getElementById('studentId').value)
 
         document.body.appendChild(form);
@@ -115,24 +117,21 @@
 <!-- Contact-->
 <section class="page-section" id="contact">
     <div class="container">
+        <% if( list != null && list.size() > 0){ %>
         <div class="text-center">
             <h2 class="section-heading text-uppercase">결과</h2>
             <h3 class="section-subheading text-muted">표정 분석 결과와 질문 내용 및 답변</h3>
         </div>
-        <div class="mb-5">
-            <span class="m-3">이름: </span>
-            <span class="m-3">학번: </span>
-            <span class="m-3">과: </span>
-        </div>
         <div>
             <h3 class="'section-heading m-3">질문 & 답변 리스트</h3>
         </div>
+        <% for(int i = 0; i < list.size(); i++){ %>
         <div>
             <ul class="list-group">
                 <li class="list-group-item list-margin">
                     <div class="row">
                         <div class="col-10">
-                            <h4 class="m-b-0 font-medium p-0">1차 직무: ${Job1}, 2차 직무: ${Job2}</h4>
+                            <h4 class="m-b-0 font-medium p-0">1차 직무: <%=list.get(i).getFirstJobName()%>, 2차 직무: <%=list.get(i).getSecondJobName()%></h4>
                         </div>
                         <div class="col-2">
                             <div class="ml-auto">
@@ -146,10 +145,10 @@
                     <div class="row">
                         <div class="col-10">
                             <h4 class="m-b-0 font-medium p-0">지원 동기</h4>
-                            <span style="width:100px; overflow: hidden; word-break:break-all;">${intro1}</span>
+                            <span style="width:100px; overflow: hidden; word-break:break-all;"><%=list.get(i).getIntroFirst()%></span>
                             <br>
                             <h4 class="m-b-0 font-medium p-0">직무와 관련된 경험 및 활동</h4>
-                            <span style="width:100px; overflow: hidden; word-break:break-all;">${intro2}</span>
+                            <span style="width:100px; overflow: hidden; word-break:break-all;"><%=list.get(i).getIntroSecond()%></span>
                         </div>
                         <div class="col-2">
                             <div class="ml-auto">
@@ -159,12 +158,11 @@
                     </div>
                 </li>
 
-                <% for (int i = 0; i < 3; i++) { %>
                 <li class="list-group-item list-margin">
                     <div class="row">
                         <div class="col-10">
-                            <h4 class="m-b-0 font-medium p-0"><%=Q.get(i)%></h4>
-                            <span><%=A.get(i)%></span>
+                            <h4 class="m-b-0 font-medium p-0"><%=list.get(i).getQ1()%></h4>
+                            <span><%=list.get(i).getA1()%></span>
                         </div>
                         <div class="col-2">
                             <div class="ml-auto">
@@ -173,14 +171,42 @@
                         </div>
                     </div>
                 </li>
-                <% } %>
+                <li class="list-group-item list-margin">
+                    <div class="row">
+                        <div class="col-10">
+                            <h4 class="m-b-0 font-medium p-0"><%=list.get(i).getQ2()%></h4>
+                            <span><%=list.get(i).getA2()%></span>
+                        </div>
+                        <div class="col-2">
+                            <div class="ml-auto">
+                                <h5 class="text-muted m-b-0">답변 관련 정보</h5>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item list-margin">
+                    <div class="row">
+                        <div class="col-10">
+                            <h4 class="m-b-0 font-medium p-0"><%=list.get(i).getQ3()%></h4>
+                            <span><%=list.get(i).getA3()%></span>
+                        </div>
+                        <div class="col-2">
+                            <div class="ml-auto">
+                                <h5 class="text-muted m-b-0">답변 관련 정보</h5>
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
+        <br><br>
+        <%}%>
+        <%}%>
     </div>
     <div class="form-group form-group-textarea mb-md-0">
         <!-- Message input-->
         <textarea class="form-control" id="studentId" name="studentId" placeholder="학번을 입력해주세요" style="resize: none" maxlength="10" required></textarea>
-        <div class="text-end"><button href="javascript:;" class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit", onclick="post('http://localhost:9090/save','post')">저장하기</button></div>
+        <div class="text-end"><button href="javascript:;" class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit", onclick="post('http://localhost:9090/record','post')">불러오기</button></div>
     </div>
 
 </section>

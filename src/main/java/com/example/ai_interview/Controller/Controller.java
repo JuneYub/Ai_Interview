@@ -1,10 +1,11 @@
 package com.example.ai_interview.Controller;
 
 
+import com.example.ai_interview.Model.RecordEntity;
 import com.example.ai_interview.Repository.JobRepository;
 import com.example.ai_interview.Repository.SecondJobRepository;
+import com.example.ai_interview.Service.Db.DbService;
 import com.example.ai_interview.Service.JobList;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -15,10 +16,11 @@ import java.util.*;
 
 import com.example.ai_interview.Model.introductionDto;
 
-import javax.servlet.http.HttpServletRequest;
-
 @org.springframework.stereotype.Controller
 public class Controller {
+
+    @Autowired
+    private DbService dbService;
 
     @RequestMapping("/index")
     public ModelAndView index() {
@@ -161,7 +163,7 @@ public class Controller {
 
     @RequestMapping("/result")
     public ModelAndView result(Model model, String question1, String question2, String question3, String answer1, String answer2, String answer3,
-                               String firstJob,String secondJob,String introFirst,String introSecond) {
+                               String firstJob, String secondJob, String introFirst, String introSecond) {
         // jsp파일 res를 위함
         ModelAndView mv = new ModelAndView();
         mv.addObject("question1", question1);
@@ -176,6 +178,52 @@ public class Controller {
         mv.addObject("intro2", introSecond);
 
         mv.setViewName("result");
+
+        return mv;
+    }
+
+    @RequestMapping("/save")
+    public String result(Model model, String question1, String question2, String question3, String answer1, String answer2, String answer3,
+                         String firstJob, String secondJob, String introFirst, String introSecond, String studentId) {
+        //db save
+        RecordEntity userEntity = RecordEntity.builder()
+                .a1(answer1)
+                .a2(answer2)
+                .a3(answer3)
+                .q1(question1)
+                .q2(question2)
+                .q3(question3)
+                .firstJobName(firstJob)
+                .secondJobName(secondJob)
+                .introFirst(introFirst)
+                .introSecond(introSecond)
+                .studentId(studentId)
+                .build();
+
+        dbService.insert(userEntity);
+
+        return "/main";
+    }
+
+    @RequestMapping(value = "/record", method = RequestMethod.GET)
+    public ModelAndView record(Model model) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("record");
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/record", method = RequestMethod.POST)
+    public ModelAndView record(Model model, String studentId) {
+
+        ArrayList<RecordEntity> re = dbService.find(studentId);
+        System.out.println("test!!!!!!!!!!!!");
+//        System.out.println("sId = "+studentId);
+        System.out.println(re.size());
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("list", re);
+        mv.setViewName("record");
 
         return mv;
     }
